@@ -1,4 +1,5 @@
-#This script produced the densitree in Figure 1A. The colors and background tree were added with Illustrator.
+#This script produces the densitree in Figure 1A. The colors and background tree were added with Illustrator.
+#The data was generated 
 
 library(devtools)
 source("https://bioconductor.org/biocLite.R")
@@ -9,12 +10,6 @@ library(ape)
 library(bindrcpp)
 
 setwd(dir = "HeliconiusComparativeGenomics/")
-
-getMaxEdgeLength <- function(phyloTree){
-  maxEdge <- max(phyloTree$edge.length)
-}
-
-newGetAges <- phangorn:::getAges
 
 
 ############## Define Dataset ###############
@@ -34,7 +29,7 @@ treeTips=baseTree$tip.label
 
 treeInputs=read.tree(treeList, keep.multi = T)
 
-#These trees includ all lepidoptera; reduce to just Heliconius and Eueides for ease of visualization
+#These trees include all lepidoptera; reduce to just Heliconius and Eueides for ease of visualization
 pruned<-lapply(treeInputs,function(t,tips)
   drop.tip(t,setdiff(t$tip.label,tips)),tips=treeTips)
 class(pruned)<-"multiPhylo"
