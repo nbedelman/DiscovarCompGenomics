@@ -27,6 +27,7 @@ DXY="datasets/10KBAbutting_toErato/eraClade.distances.csv"
 HeratoGenome <- read.delim("datasets/Herato.transitions_fullChroms.bed", col.names=c("seqnames","start","end","chromosome"), header=F)
 out=""
 
+############# Define helper functions ############
 getChrom <- function (x) {
   chrom <- strsplit(x,"_")[[1]][1]
   return(chrom)
@@ -35,10 +36,6 @@ getChrom <- function (x) {
 getEnd <- function (x) {
   end <- strsplit(x,"_")[[1]][2]
   return(end)
-}
-
-getAlnLength <- function(x) {
-  return(allData[which(allData$segment==x),]$alnLength)
 }
 
 
