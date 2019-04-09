@@ -1,0 +1,1 @@
+/n/mallet_lab/edelman/18Genomes/results/DiscovarCompGenomics/scripts/wigToBed.py
