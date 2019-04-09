@@ -1,0 +1,8 @@
+DIR:          qpData
+SSS:          allHeliconiini_toHmel_placed
+indivname:    DIR/allGenomes.ind
+snpname:      DIR/SSS.snp
+genotypename: DIR/SSS.geno
+poplistname:  DIR/allTaxa.pop
+printsd:  YES
+blgsize:      0.05

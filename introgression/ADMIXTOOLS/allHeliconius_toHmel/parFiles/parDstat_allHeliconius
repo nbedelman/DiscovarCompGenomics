@@ -1,0 +1,9 @@
+DIR:          qpData
+SSS:          allGenomes.helSingleCopy
+indivname:    DIR/SSS.ind
+snpname:      DIR/SSS.chrom.fakeDist.snp
+genotypename: DIR/SSS.geno
+poplistname:  DIR/Dstat_heliconius.pop
+printsd:  YES
+f4mode:   NO
+blgSize:  .01

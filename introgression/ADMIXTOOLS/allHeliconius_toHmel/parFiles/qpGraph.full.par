@@ -1,0 +1,16 @@
+DIR:   qpData
+indivname:       DIR/allHeliconius.ind
+snpname:         DIR/allHeliconiini_toHmel_placed.full.snp
+genotypename:    DIR/allHeliconiini_toHmel_placed.full.geno
+outpop:         NULL
+blgsize:        0.05
+## block size in Morgans for Jackknife
+## see below
+lsqmode:       YES
+diag:          .0001
+hires:         YES
+initmix:      1000
+precision:    .0001
+zthresh:      3.0
+terse:        NO
+useallsnps:   NO
