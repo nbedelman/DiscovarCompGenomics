@@ -18,8 +18,14 @@ data/nano.save
 *.ss
 *.phy
 *.mod
+*.vcf
+*.snp
+*.ind
+*.geno
+*.csv
 
 results/subTreeAlignmentDepth.genome
+AssemblyStats/BUSCO/run_*
 
 results/short_subTreeAlignmentDepth.wig
 
