@@ -1,0 +1,6 @@
+*.pdf
+.R*
+*.tar.gz
+Inversions/data/
+*.bed
+*.txt *.tsv
