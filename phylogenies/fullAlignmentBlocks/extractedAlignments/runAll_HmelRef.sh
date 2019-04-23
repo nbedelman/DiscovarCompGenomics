@@ -85,7 +85,7 @@ do
   done
 done
 
-#after I ran this code, I realized that I needed to re-do the fully-aligned sites analysis because I originally did not consider whether regions were duplicated or not.
+#after I ran this code, I realized that I needed to re-do the fully-aligned sites analysis because I originally did not consider blocks (with no gaps) were aligned among ALL of the species.
 mkdir $r\_beds
 mkdir $r\_fastas
 
