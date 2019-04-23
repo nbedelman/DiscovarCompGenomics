@@ -3,4 +3,6 @@
 *.tar.gz
 Inversions/data/
 *.bed
-*.txt *.tsv
+#*.txt 
+#*.tsv
+*.png
