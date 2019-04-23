@@ -1,7 +1,4 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+.R*
 *.fa
 *.maf
 *.gp
@@ -23,6 +20,9 @@ data/nano.save
 *.ind
 *.geno
 *.csv
+
+*.tar.gz
+Inversions/data/
 
 results/subTreeAlignmentDepth.genome
 AssemblyStats/BUSCO/run_*
