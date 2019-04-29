@@ -12,7 +12,7 @@ library(agricolae)
 setwd("~/Dropbox/HeliconiusComparativeGenomics/FdComparison/")
 
 #####define datafiles 
-QUIBL2DIST="miyagi_outputSummary_noRecombination.csv"
+QUIBL2DIST="miyagi_outputSummary_all2Dist.csv"
 QUIBL1DIST="miyagi_outputSummary_all1Dist.csv"
 FdSummary="eratoClade.helSingleCopy.Fd_withNeg.csv"
 
@@ -43,6 +43,11 @@ for(line in seq(1,nrow(fd))){
 fd$triplet <- triplets
 
 combined <- inner_join(quibl,fd,by=c("triplet","P1"))
+
+geneTreeIndices=c(1,3,7,9,13,15,19,21,25,27,31,33,35,39,41,45,47,54,56,57,59,63,65,69,71,75,77,81,83,90,92,93,95,99,101,108,110,114,116)
+fd_geneTree <- fd[geneTreeIndices,]
+combined_geneTree <- inner_join(quibl,fd_geneTree,by=c("triplet","P1"))
+
 colors=brewer.pal(8,"Paired")
 
 ##### total introgression proportions #####
@@ -63,7 +68,7 @@ propOverallIntro <- discordIntro/sum(quibl2Dist$numTrees)
 #### overview graphs 
 CvalHist <- ggplot(data=combined,aes(x=C2))+
   geom_histogram(bins=20)+
-  labs(y="Number of topologies",x="introgression C")+
+  labs(y="Number of topologies",x="introgression C")
   #geom_vline(xintercept = 0.5)
 CvalHist
 ggsave(CvalHist,file=paste0(out,"CVal_hist.pdf"),height=10,width=10)
@@ -94,29 +99,29 @@ CvalVsTotalIntroProp <- ggplot(data=combined)+
 CvalVsTotalIntroProp
 ggsave(CvalVsTotalIntroProp,file=paste0(out,"CValVsTotalIntroProp.pdf"),height=10,width=10)
 
-FdVsTotalIntroProp <- ggplot(data=combined)+
+FdVsTotalIntroProp <- ggplot(data=combined_geneTree)+
   geom_point(aes(x=totalIntroProp,y=meanFd,size=numTrees/5600, col=numTrees>2790, pch=isSig), alpha=.7)+
   labs(x="Total introgression proportion",y="meanFd")+
   scale_size_continuous(name = "Proportion of topologies")+
   scale_color_manual(values=c(colors[8],colors[2]),labels=c("minority","majority"),name="")+
   scale_shape_manual(values=c(18,19),labels=c("nonsignificant","significant"),name="")+
   theme(legend.position="none")+
-  scale_x_continuous(limits=c(0,1))+
-  scale_y_continuous(limits=c(0,1))+
+  scale_x_continuous(limits=c(0,0.5))+
+  scale_y_continuous(limits=c(0,0.5))+
   geom_abline(slope=1,intercept=0)
 FdVsTotalIntroProp
-ggsave(FdVsTotalIntroProp,file=paste0(out,"FdVsTotalIntroProp.pdf"),height=10,width=10)
+ggsave(FdVsTotalIntroProp,file=paste0(out,"FdVsTotalIntroProp_geneTrees.pdf"),height=10,width=10)
 
-DVsTotalIntroProp <- ggplot(data=combined)+
+DVsTotalIntroProp <- ggplot(data=combined_geneTree)+
   geom_point(aes(x=totalIntroProp,y=abs(meanD),size=numTrees/5600, col=numTrees>2790, pch=isSig), alpha=.7)+
   labs(x="Total introgression proportion",y="abs(mean D)")+
   scale_size_continuous(name = "Proportion of topologies")+
   scale_color_manual(values=c(colors[8],colors[2]),labels=c("minority","majority"),name="")+
-  scale_x_continuous(limits=c(0,1))+
-  scale_y_continuous(limits=c(0,1))+
+  scale_x_continuous(limits=c(0,0.5))+
+  scale_y_continuous(limits=c(0,0.5))+
   geom_abline(slope=1,intercept=0)+
   scale_shape_manual(values=c(18,19),labels=c("nonsignificant","significant"),name="")+
   theme(legend.position="none")
 DVsTotalIntroProp
-ggsave(DVsTotalIntroProp,file=paste0(out,"DVsTotalIntroProp.pdf"),height=10,width=10)
+ggsave(DVsTotalIntroProp,file=paste0(out,"DVsTotalIntroProp_geneTrees.pdf"),height=10,width=10)
 
