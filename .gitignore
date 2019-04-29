@@ -20,7 +20,7 @@ data/nano.save
 *.ind
 *.geno
 *.csv
-
+*.txt
 *.tar.gz
 Inversions/data/
 
