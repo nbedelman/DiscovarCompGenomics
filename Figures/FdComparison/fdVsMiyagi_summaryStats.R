@@ -30,7 +30,7 @@ colnames(quibl)[11] <- "maxL1"
 quibl$BICdiff=quibl$BIC-quibl$BIC1
 quibl$likeDiff=quibl$maxL-quibl$maxL1
 quibl$totalIntroProp <- quibl$prop2*(quibl$numTrees/5600)
-quibl$isSig <- quibl$BICdiff < (-10)
+quibl$isSig <- quibl$BICdiff < (-15)
 quibl$MLsig <- quibl$likeDiff> (-10)
 
 fd=read.csv(FdSummary)
@@ -41,6 +41,15 @@ for(line in seq(1,nrow(fd))){
   triplets <- c(triplets,paste(seqList[1],seqList[2],seqList[3],sep="_"))
 }
 fd$triplet <- triplets
+
+
+
+
+outGroup="HmelRef"
+if (is.na(outGroup)){
+  quibl$hasOverallOut <- F
+} else {quibl$hasOverallOut <- grepl(outGroup,quibl$triplet)}
+quibl <- subset(quibl,hasOverallOut==F)
 
 combined <- inner_join(quibl,fd,by=c("triplet","P1"))
 
@@ -55,15 +64,17 @@ colors=brewer.pal(8,"Paired")
 #EtalOut 3330/2
 #HQ 1800
 #allData 2790
-discordSet=subset(quibl2Dist, numTrees<(2260))
+discordSet=subset(quibl, numTrees<(2260))
 allDiscordTrees=sum(discordSet$numTrees)
-pctDiscordTrees=allDiscordTrees/sum(quibl2Dist$numTrees)
-#discordIntro <- sum(discordSet$numTrees*discordSet$prop2*as.numeric(discordSet$isSig))
+pctDiscordTrees=allDiscordTrees/sum(quibl$numTrees)
+discordIntro <- sum(discordSet$numTrees*discordSet$prop2*as.numeric(discordSet$isSig))
 #discordIntro <- sum(discordSet$numTrees*discordSet$prop2*as.numeric(discordSet$MLsig))
-discordIntro <- sum(discordSet$numTrees*discordSet$prop2)
+#discordIntro <- sum(discordSet$numTrees*discordSet$prop2)
 propDiscordIntro <- discordIntro/allDiscordTrees
-propOverallIntro <- discordIntro/sum(quibl2Dist$numTrees)
+propOverallIntro <- discordIntro/sum(quibl$numTrees)
 
+length(which(discordSet$isSig==T))
+length(unique(subset(discordSet, isSig==T)$triplet))
 
 #### overview graphs 
 CvalHist <- ggplot(data=combined,aes(x=C2))+
